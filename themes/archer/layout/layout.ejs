@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html lang="<%- config.language %>">
     <%- partial('_partial/base-head') %>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script type="text/javascript">
-        if (typeof window.$ == undefined) {
-            console.warn('jquery load from jsdelivr failed, will load local script')
-            document.write('<script src="<%- url_for('lib/jquery.min.js') %>" />')
-        }
-    </script>
+    <!-- 使用站内 jQuery，避免 jsdelivr 在国内加载失败导致页面一直显示 loading -->
+    <script src="<%- url_for('lib/jquery.min.js') %>"></script>
     <%_ if (is_home()) { _%>
         <body class="home-body">
     <%_ } else if(is_post()){ _%>
