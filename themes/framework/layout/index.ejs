@@ -1,0 +1,34 @@
+<%_ if (page.current === 1) { _%>
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <p class="eyebrow"><%= theme.hero.eyebrow %></p>
+      <h1 class="hero-title"><%= config.title %></h1>
+      <p class="hero-sub"><%= config.subtitle %></p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="<%- url_for(theme.hero.primary.url) %>"><%= theme.hero.primary.text %></a>
+        <a class="btn btn-ghost" href="<%- url_for(theme.hero.secondary.url) %>"><%= theme.hero.secondary.text %></a>
+      </div>
+    </div>
+    <div class="hero-stack" role="img" aria-label="Android 系统分层架构，本站重点为 Java API Framework 层">
+      <%_ theme.layers.forEach(function (layer, i) { _%>
+        <div class="layer<%- i === theme.highlight_layer ? ' layer-active' : '' %>">
+          <span class="layer-name"><%= layer.name %></span>
+          <span class="layer-desc"><%= layer.desc %></span>
+        </div>
+      <%_ }) _%>
+    </div>
+  </div>
+</section>
+<%_ } _%>
+
+<div class="container home-layout">
+  <main id="main" class="post-list">
+    <h2 class="section-title">最新文章</h2>
+    <%_ page.posts.each(function (post) { _%>
+      <%- partial('_partial/post-item', {post: post}) %>
+    <%_ }) _%>
+    <%- partial('_partial/pagination') %>
+  </main>
+  <%- partial('_partial/sidebar') %>
+</div>

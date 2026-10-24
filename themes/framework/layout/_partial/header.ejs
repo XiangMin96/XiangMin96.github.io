@@ -1,0 +1,18 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="<%- url_for('/') %>">
+      <img class="brand-logo" src="<%- url_for('favicon.svg') %>" alt="" width="28" height="28">
+      <span><%= config.title %></span>
+    </a>
+    <nav class="site-nav" aria-label="主导航">
+      <%_ for (var name in theme.menu) { _%>
+        <%_ var link = theme.menu[name]; _%>
+        <%_ var active = link === '/' ? is_home() : ('/' + page.path).indexOf(link) === 0; _%>
+        <a href="<%- url_for(link) %>"<%- active ? ' class="active" aria-current="page"' : '' %>><%= name %></a>
+      <%_ } _%>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="切换深色/浅色模式" title="切换深色/浅色模式">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg>
+    </button>
+  </div>
+</header>

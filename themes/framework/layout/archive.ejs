@@ -1,0 +1,32 @@
+<%_
+  // archive / category / tag 三种列表页共用这个模板
+  var heading = '归档';
+  if (is_category()) heading = page.category;
+  else if (is_tag()) heading = '#' + page.tag;
+_%>
+<header class="page-header">
+  <div class="container narrow">
+    <h1 class="page-title"><%= heading %></h1>
+    <p class="page-info">共 <%= page.posts.length %> 篇文章</p>
+  </div>
+</header>
+<div class="container narrow">
+  <main id="main" class="page-body">
+    <%_ var lastYear = null; _%>
+    <%_ page.posts.each(function (post) { _%>
+      <%_ var year = date(post.date, 'YYYY'); _%>
+      <%_ if (year !== lastYear) { _%>
+        <%_ if (lastYear !== null) { _%></ul><%_ } _%>
+        <%_ lastYear = year; _%>
+        <h2 class="archive-year"><%= year %></h2>
+        <ul class="archive-list">
+      <%_ } _%>
+          <li>
+            <time datetime="<%= date_xml(post.date) %>"><%= date(post.date, 'MM-DD') %></time>
+            <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+          </li>
+    <%_ }) _%>
+    <%_ if (lastYear !== null) { _%></ul><%_ } _%>
+    <%- partial('_partial/pagination') %>
+  </main>
+</div>

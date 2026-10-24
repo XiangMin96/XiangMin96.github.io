@@ -1,0 +1,31 @@
+<aside class="sidebar">
+  <section class="side-card author-card">
+    <img class="avatar" src="<%- url_for(theme.avatar) %>" alt="<%= config.author %> 的头像" width="72" height="72">
+    <h2 class="author-name"><%= config.author %></h2>
+    <p class="author-sign"><%= theme.signature %></p>
+    <a class="btn btn-small" href="<%- theme.github %>" target="_blank" rel="noopener">GitHub</a>
+  </section>
+
+  <section class="side-card">
+    <h2 class="side-title">专栏模块</h2>
+    <%_ if (site.categories.length) { _%>
+      <ul class="side-list">
+        <%_ site.categories.sort('name').each(function (c) { _%>
+          <li><a href="<%- url_for(c.path) %>"><span><%= c.name %></span><span class="count"><%= c.length %></span></a></li>
+        <%_ }) _%>
+      </ul>
+    <%_ } _%>
+    <a class="side-more" href="<%- url_for('/series/') %>">查看完整写作计划 →</a>
+  </section>
+
+  <%_ if (site.tags.length) { _%>
+    <section class="side-card">
+      <h2 class="side-title">标签</h2>
+      <div class="tag-cloud">
+        <%_ site.tags.sort('name').each(function (t) { _%>
+          <a class="chip" href="<%- url_for(t.path) %>">#<%= t.name %></a>
+        <%_ }) _%>
+      </div>
+    </section>
+  <%_ } _%>
+</aside>

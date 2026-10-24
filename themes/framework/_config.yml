@@ -1,0 +1,39 @@
+# 顶部导航
+menu:
+  首页: /
+  专栏目录: /series/
+  归档: /archives/
+  分类: /categories/
+  关于: /about/
+
+# 作者信息（侧边栏）
+avatar: /avatar/avatar.png
+signature: 读源码，理解 Android 系统
+github: https://github.com/XiangMin96
+
+# 首页顶部
+hero:
+  eyebrow: AOSP 源码阅读笔记
+  primary:
+    text: 开始阅读
+    url: /2026/10/24/start-here/
+  secondary:
+    text: 专栏目录
+    url: /series/
+
+# 首页右侧的 Android 系统分层图，highlight 为高亮层的序号（从 0 开始）
+layers:
+  - name: Applications
+    desc: 系统应用 / 第三方应用
+  - name: Java API Framework
+    desc: AMS · WMS · PMS · View · Binder
+  - name: Native Libraries · ART
+    desc: libbinder · SurfaceFlinger · HWUI
+  - name: HAL
+    desc: 硬件抽象层
+  - name: Linux Kernel
+    desc: Binder 驱动 · 调度 · 内存
+highlight_layer: 1
+
+# 文章底部版权声明
+copyright: 本文采用 CC BY-NC 4.0 许可协议，转载请注明出处。

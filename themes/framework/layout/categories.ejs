@@ -1,0 +1,34 @@
+<header class="page-header">
+  <div class="container narrow">
+    <h1 class="page-title"><%= page.title || '分类' %></h1>
+    <p class="page-info">共 <%= site.categories.length %> 个分类，<%= site.posts.length %> 篇文章</p>
+  </div>
+</header>
+<div class="container narrow">
+  <main id="main" class="page-body">
+    <%_ site.categories.sort('name').each(function (c) { _%>
+      <section class="archive-group">
+        <h2 class="archive-year"><a href="<%- url_for(c.path) %>"><%= c.name %></a> <span class="count"><%= c.length %></span></h2>
+        <ul class="archive-list">
+          <%_ c.posts.sort('date', -1).each(function (post) { _%>
+            <li>
+              <time datetime="<%= date_xml(post.date) %>"><%= date(post.date, 'YYYY-MM-DD') %></time>
+              <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+            </li>
+          <%_ }) _%>
+        </ul>
+      </section>
+    <%_ }) _%>
+
+    <%_ if (site.tags.length) { _%>
+      <section class="archive-group">
+        <h2 class="archive-year">标签</h2>
+        <div class="tag-cloud">
+          <%_ site.tags.sort('name').each(function (t) { _%>
+            <a class="chip" href="<%- url_for(t.path) %>">#<%= t.name %> <span class="count"><%= t.length %></span></a>
+          <%_ }) _%>
+        </div>
+      </section>
+    <%_ } _%>
+  </main>
+</div>

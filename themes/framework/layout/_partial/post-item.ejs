@@ -1,0 +1,16 @@
+<article class="post-card">
+  <div class="post-meta">
+    <time datetime="<%= date_xml(post.date) %>"><%= date(post.date, 'YYYY-MM-DD') %></time>
+    <%_ if (post.categories && post.categories.length) { _%>
+      <%_ post.categories.each(function (c) { _%>
+        <a class="chip" href="<%- url_for(c.path) %>"><%= c.name %></a>
+      <%_ }) _%>
+    <%_ } _%>
+    <%_ if (post.sticky) { _%>
+      <span class="chip chip-pin">置顶</span>
+    <%_ } _%>
+  </div>
+  <h3 class="post-card-title"><a href="<%- url_for(post.path) %>"><%= post.title %></a></h3>
+  <p class="post-card-excerpt"><%= truncate(strip_html(post.excerpt || post.content), {length: 140}) %></p>
+  <a class="read-more" href="<%- url_for(post.path) %>" aria-label="阅读全文：<%= post.title %>">阅读全文 →</a>
+</article>

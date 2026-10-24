@@ -102,7 +102,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: archer
+theme: framework
 
 # Archer 侧边栏索引依赖 hexo-generator-json-content
 jsonContent:
