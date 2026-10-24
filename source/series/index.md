@@ -41,7 +41,7 @@ layout: page
 - View 的 measure、layout、draw
 - RenderThread 与 HWUI
 - SurfaceFlinger 系列
-  - SurfaceFlinger（一）：整体架构与启动流程
+  - [SurfaceFlinger（一）：整体架构与启动流程](/2026/10/24/surfaceflinger-01-architecture/)
   - SurfaceFlinger（二）：Surface、Layer 与 BufferQueue
   - SurfaceFlinger（三）：Vsync 信号的产生与分发
   - SurfaceFlinger（四）：一帧的合成流程

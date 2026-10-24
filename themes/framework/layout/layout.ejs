@@ -9,7 +9,9 @@
     else if (is_category()) pageTitle = '分类：' + page.category + ' | ' + config.title;
     else if (is_tag()) pageTitle = '标签：' + page.tag + ' | ' + config.title;
     else if (is_archive()) pageTitle = '归档 | ' + config.title;
-    var pageDesc = page.description || (page.excerpt ? truncate(strip_html(page.excerpt), {length: 120}) : config.description);
+    var pageDesc = page.description || (page.excerpt
+      ? truncate(strip_html(page.excerpt.replace(/<blockquote[\s\S]*?<\/blockquote>/g, '')).trim(), {length: 120})
+      : config.description);
   _%>
   <title><%= pageTitle %></title>
   <meta name="description" content="<%= pageDesc %>">
