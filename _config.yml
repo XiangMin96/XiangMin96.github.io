@@ -46,7 +46,11 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
+# 配合 post_asset_folder：文章里可直接写 ![](图片.png) 引用同名文件夹里的图片
+marked:
+  prependRoot: true
+  postAsset: true
 relative_link: false
 future: true
 syntax_highlighter: highlight.js

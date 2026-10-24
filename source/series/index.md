@@ -39,7 +39,15 @@ layout: page
 
 - Vsync 与 Choreographer
 - View 的 measure、layout、draw
-- RenderThread 与 SurfaceFlinger 合成
+- RenderThread 与 HWUI
+- SurfaceFlinger 系列
+  - SurfaceFlinger（一）：整体架构与启动流程
+  - SurfaceFlinger（二）：Surface、Layer 与 BufferQueue
+  - SurfaceFlinger（三）：Vsync 信号的产生与分发
+  - SurfaceFlinger（四）：一帧的合成流程
+  - SurfaceFlinger（五）：HWC 合成与 GPU 合成
+  - SurfaceFlinger（六）：Transaction 机制
+  - SurfaceFlinger（七）：用 Perfetto 分析合成卡顿
 
 ## 7. Input 系统
 
