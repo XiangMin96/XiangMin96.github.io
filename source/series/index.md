@@ -42,7 +42,7 @@ layout: page
 - RenderThread 与 HWUI
 - SurfaceFlinger 系列
   - [SurfaceFlinger（一）：整体架构与启动流程](/2026/10/24/surfaceflinger-01-architecture/)
-  - SurfaceFlinger（二）：Surface、Layer 与 BufferQueue
+  - [SurfaceFlinger（二）：Surface、Layer 与 BufferQueue](/2026/10/25/surfaceflinger-02-bufferqueue/)
   - SurfaceFlinger（三）：Vsync 信号的产生与分发
   - SurfaceFlinger（四）：一帧的合成流程
   - SurfaceFlinger（五）：HWC 合成与 GPU 合成

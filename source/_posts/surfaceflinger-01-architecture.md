@@ -36,16 +36,22 @@ App 画好的一帧，最终由 SurfaceFlinger 合成并送到屏幕上。这篇
 从 App 到屏幕，一帧数据大致经过这些环节：
 
 ```text
-App 进程                         surfaceflinger 进程                    硬件
-┌──────────────────────┐        ┌──────────────────────────────┐
-│ View 绘制             │        │ Layer 管理                    │
-│ RenderThread / HWUI  │ buffer │ Scheduler（Vsync 调度）         │       ┌──────────┐
-│ BLASTBufferQueue     │ ─────▶ │ CompositionEngine             │ ────▶ │ HWC HAL  │ ──▶ 屏幕
-└──────────────────────┘        │  ├─ HWComposer（硬件合成）      │       └──────────┘
-        ▲                       │  └─ RenderEngine（GPU 合成）    │
-        │ Vsync-app             └──────────────────────────────┘
-        └──────────────────────────────┘
-system_server（WMS）── Transaction（窗口层级、位置、可见性）──▶ SurfaceFlinger
+App 进程
+  View 绘制 → RenderThread / HWUI → BLASTBufferQueue
+        │ buffer（随 Transaction 提交）
+        ▼
+surfaceflinger 进程
+  Layer 管理
+  Scheduler（Vsync 调度）── Vsync-app ──▶ 唤醒 App 绘制下一帧
+  CompositionEngine
+    ├─ HWComposer（硬件合成）
+    └─ RenderEngine（GPU 合成）
+        │
+        ▼
+HWC HAL ──▶ 屏幕
+
+system_server（WMS）
+  └─ Transaction（窗口层级、位置、可见性）──▶ SurfaceFlinger
 ```
 
 App 和 WMS 都是 SurfaceFlinger 的客户端，通过 Binder 和它通信。App 侧通过 BLASTBufferQueue 把画好的 buffer 随 Transaction 一起提交，这部分放到第二篇细讲。
@@ -462,7 +468,7 @@ App 提交 buffer ──▶ scheduleFrame() 预约唤醒
 - `init()` 依次创建 RenderEngine（GPU 合成）和 HWComposer（硬件合成），处理开机时的显示设备，创建 Scheduler，预热 shader，最后异步拉起开机动画。
 - 主线程是一个基于 Looper 的消息循环。只有在有新内容时，SurfaceFlinger 才会预约下一个 Vsync；Vsync 到来后由 `Scheduler::onFrameSignal` 依次调用 `commit()` 和 `composite()` 完成一帧。
 
-下一篇看 App 侧：Surface、Layer 和 BufferQueue 是怎么建立起来的，一块 buffer 又是怎么从 App 送到 SurfaceFlinger 的。
+[下一篇](/2026/10/25/surfaceflinger-02-bufferqueue/)看 App 侧：Surface、Layer 和 BufferQueue 是怎么建立起来的，一块 buffer 又是怎么从 App 送到 SurfaceFlinger 的。
 
 ## 参考
 
